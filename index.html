@@ -1100,7 +1100,7 @@
         <span class="cp-achievement-icon" aria-hidden="true">🏆</span>
         <span>
           Ranked <strong style="color:#c4c0e0">#11 at university level</strong> and qualified to the next round of the competitive programming contest.
-          <a href="Certificate.pdf" onclick="openCertificate(event)" aria-haspopup="dialog" aria-label="View certificate">
+          <a href="Certificate.pdf" onclick="openCertificate(event)" aria-haspopup="dialog" aria-label="View university programming contest certificate">
             View Certificate
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
@@ -1196,9 +1196,10 @@
 <script>
   const scrollLine = document.getElementById('scrollLine');
   window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-    scrollLine.style.transform = `scaleX(${pct})`;
-  }, { passive: true });
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    scrollLine.style.transform = `scaleX(${scrolled / total})`;
+  });
 
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -1221,12 +1222,16 @@
     }
   }, { threshold: 0.15 }).observe(document.querySelector('.skills-grid'));
 
-  function openCertificate(e) {
-    e.preventDefault();
+  function openCertificate(event) {
+    event.preventDefault();
     const dialog = document.getElementById('pdfDialog');
     const frame = document.getElementById('certificateFrame');
-    if (frame && !frame.src && frame.dataset.src) frame.src = frame.dataset.src;
-    dialog?.showModal();
+    if (!dialog) return;
+    if (frame) {
+      const src = frame.getAttribute('data-src');
+      if (!frame.getAttribute('src') && src) frame.setAttribute('src', src);
+    }
+    dialog.showModal();
   }
   function closeCertificate() {
     document.getElementById('pdfDialog')?.close();
