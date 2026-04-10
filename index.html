@@ -902,7 +902,9 @@
     .job-meta { align-items: flex-start; }
     .cp-top { flex-direction: column; }
     .cp-stat-value { font-size: 26px; }
-    .name { letter-spacing: -2px; }
+    .name { letter-spacing: -2px; white-space: nowrap; }
+    .name br { display: none; }
+    .name span { display: inline; }
     .container { padding: 48px 20px 80px; }
   }
 </style>
