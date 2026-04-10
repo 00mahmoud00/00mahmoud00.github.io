@@ -339,6 +339,8 @@
   .profile-img-wrap {
     position: relative;
     flex-shrink: 0;
+    width: 120px;
+    height: 120px;
   }
   .profile-img-wrap::before {
     content: '';
@@ -894,7 +896,7 @@
 
   @media (max-width: 640px) {
     .hero-inner { grid-template-columns: 1fr; }
-    .profile-img-wrap { order: -1; }
+    .profile-img-wrap { order: -1; align-self: center; justify-self: center; }
     .projects-grid { grid-template-columns: 1fr; }
     .job-header { flex-direction: column; }
     .job-meta { align-items: flex-start; }
